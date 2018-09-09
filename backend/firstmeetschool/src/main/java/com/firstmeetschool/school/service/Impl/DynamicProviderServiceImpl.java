@@ -16,9 +16,15 @@ public class DynamicProviderServiceImpl implements DynamicProviderService {
     DynamicProviderMapper DynamicProviderMapper;
 
     @Override
-    public User findUserById(Integer id){
-        return DynamicProviderMapper.findUserById(id);
+    public User findUserById(String usrId){
+        return DynamicProviderMapper.findUserById(usrId);
     }
+
+    @Override
+    public String findIsVerifiedByUsrId(String id){return DynamicProviderMapper.findIsVerifiedByUsrId(id);}
+
+    @Override
+    public Integer getInvitationCardsNumByUsrId(String id){ return DynamicProviderMapper.getInvitationCardsNumByUsrId(id);}
 
     @Override
     public List<User> findUserByNameSql(String usrName){
@@ -26,11 +32,13 @@ public class DynamicProviderServiceImpl implements DynamicProviderService {
     }
 
     @Override
-    public List<User> findUserInHomePage(User user){
+    public List<User> findUserInHomePage(User user, Integer lowAge, Integer highAge){
         Map<String, Object> maps = new HashMap<>();
         maps.put("usrSex", user.getUsrSex());
         maps.put("isStudent", user.getIsStudent());
         maps.put("usrEducation", user.getUsrEducation());
+        maps.put("lowAge", lowAge);
+        maps.put("highAge", highAge);
         return DynamicProviderMapper.findUserInHomePage(maps);
     }
 
@@ -59,6 +67,11 @@ public class DynamicProviderServiceImpl implements DynamicProviderService {
         tmpUser.setSayWords(user.getSayWords());
         tmpUser.setInvitationCards(user.getInvitationCards());
         tmpUser.setCalloutNum(user.getCalloutNum());
+        tmpUser.setThumbsUp(user.getThumbsUp());
+        tmpUser.setIsVerified(user.getIsVerified());
+        tmpUser.setChushiTa(user.getChushiTa());
+        tmpUser.setIdentifyPhoto(user.getIdentifyPhoto());
+
 
         return DynamicProviderMapper.dynUpdateUser(tmpUser);
     }

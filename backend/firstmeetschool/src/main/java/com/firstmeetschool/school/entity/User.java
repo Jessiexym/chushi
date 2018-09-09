@@ -13,62 +13,84 @@ public class User {
 
     @Id
     @GeneratedValue
-    private Integer usrId;
+    private Integer id;
+
+    @NotBlank(message = "唯一标识openid")
+    private String usrId="";
 
     @NotBlank(message = "请输入微信号")
-    private String usrWechat;
+    private String usrWechat="";
 
     @NotBlank(message = "请输入姓名")
-    private String usrName;
+    private String usrName="";
 
     @NotBlank(message = "请输入手机号")
     private String usrTelephone;
 
     @NotNull(message = "请输入身高" )
-    private Float usrHeight;
+    private Integer usrHeight=0;
 
     @Min(value = 18,message = "未成年")
-    private Integer usrAge;
+    private Integer usrAge=18;
 
     @NotNull(message = "请输入家乡" )
-    private String homeTown;
+    private String homeTown="";
 
     @NotNull(message = "请输入所在城市" )
-    private String currentCity;
+    private String currentCity="";
 
     @NotNull
-    private String usrSex;
+    private String usrSex="";
 
     @NotNull
-    private String usrEducation;
+    private String usrEducation="";
 
     @NotNull
-    private String isStudent;
+    private String isStudent="";
 
-    private String atUniversity;
+    private String atUniversity="";
 
-    private String gradUniversity;
+    private String gradUniversity="";
 
-    private String usrHobby;
+    private String usrHobby="";
 
-    private String birthDay;
+    private String birthDay="";
 
-    private String usrMotto;
+    private String usrMotto="";
 
-    private String selfIntro;
+    private String selfIntro="";
 
-    private String usrPicture;
+    private String usrPicture="";
 
-    private String loverExpect;
+    private String loverExpect="";
 
-    private String sayWords;
+    private String sayWords="";
 
     // 邀请卡
-    private Integer invitationCards;
+    private Integer invitationCards=0;
+
+    // 好友邀约
+    private Integer calloutNum=0;
 
     // 点赞数
-    private Integer calloutNum;
+    private Integer thumbsUp=0;
 
+    // 是否认证
+    private String isVerified="";
+
+    // 初识Ta列表
+    private String chushiTa="";
+
+    // 身份认证
+    private  String identifyPhoto="";
+
+
+
+    public void  setId(Integer id){this.id = id;}
+
+<<<<<<< HEAD
+    public Integer getId(){return id;}
+=======
     private String openid;
 
     public String getOpenid() {
@@ -78,10 +100,11 @@ public class User {
     public void setOpenid(String openid) {
         this.openid = openid;
     }
+>>>>>>> 81593878418a8d5d0a445a0def8b6899163adef0
 
-    public void setUsrId(Integer usrId){ this.usrId = usrId;}
+    public void setUsrId(String usrId){ this.usrId = usrId;}
 
-    public Integer getUsrId() {return usrId;}
+    public String getUsrId() {return usrId;}
 
     public void setUsrName(String usrName) { this.usrName = usrName; }
 
@@ -95,9 +118,9 @@ public class User {
 
     public String getUsrTelephone() { return usrTelephone;}
 
-    public void setUsrHeight(Float usrHeight) { this.usrHeight = usrHeight;}
+    public void setUsrHeight(Integer usrHeight) { this.usrHeight = usrHeight;}
 
-    public Float getUsrHeight() { return usrHeight;}
+    public Integer getUsrHeight() { return usrHeight;}
 
     public void setUsrAge(Integer usrAge) {this.usrAge = usrAge;}
 
@@ -167,6 +190,21 @@ public class User {
 
     public Integer getCalloutNum() { return calloutNum; }
 
+    public Integer getThumbsUp() { return thumbsUp; }
+
+    public void setThumbsUp(Integer thumbsUp) {this.thumbsUp=thumbsUp;}
+
+    public String getIsVerified(){ return isVerified;}
+
+    public void setIsVerified (String isVerified) {this.isVerified = isVerified;}
+
+    public String getChushiTa () {return chushiTa;}
+
+    public void setChushiTa (String chushiTa) {this.chushiTa=chushiTa;}
+
+    public String getIdentifyPhoto() {return identifyPhoto;}
+
+    public void setIdentifyPhoto (String identifyPhoto) {this.identifyPhoto=identifyPhoto;}
 
     @Override
     public String toString(){
@@ -194,6 +232,10 @@ public class User {
                 ", sayWords='" + sayWords + '\'' +
                 ", invitationCards=" + invitationCards +
                 ", calloutNum=" + calloutNum +
+                ", thumbsUp=" + thumbsUp  +
+                ", isVerified="+ isVerified +
+                ", chushiTa="+ chushiTa +
+                ", identifyPhoto"+ identifyPhoto +
                 '}';
     }
 

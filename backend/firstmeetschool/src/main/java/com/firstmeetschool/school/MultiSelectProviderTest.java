@@ -25,9 +25,13 @@ public class MultiSelectProviderTest {
         DynamicProviderMapper mapper = session.getMapper(DynamicProviderMapper.class);
 
         Map<String, Object> map = new HashMap<>();
-        map.put("usrSex", "female");
-        map.put("isStudent", "yes");
-        map.put("usrEducation", "本科");
+        map.put("usrSex", "男");
+//        map.put("isStudent", "是");
+        map.put("usrEducation", "硕士");
+        map.put("lowAge", 23);
+        map.put("highAge", 26);
+//        Integer lowAge = 20;
+//        Integer highAge = 30;
         List<User> students = mapper.findUserInHomePage(map);
         int count = 0;
         for (User student : students) {

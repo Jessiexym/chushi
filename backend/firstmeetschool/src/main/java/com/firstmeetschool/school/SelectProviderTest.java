@@ -21,7 +21,7 @@ public class SelectProviderTest {
         session.getConfiguration().addMapper(DynamicProviderMapper.class);
         DynamicProviderMapper mapper = session.getMapper(DynamicProviderMapper.class);
 
-        User user = mapper.findUserById(1);
+        User user = mapper.findUserById("1");
         System.out.println(user.toString());
 //        System.out.println(user.getUsrName());
 //        System.out.println(user.getUsrAge());

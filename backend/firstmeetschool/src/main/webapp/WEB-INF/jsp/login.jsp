@@ -44,6 +44,10 @@
 </head>
 <body>
 
+<<<<<<< HEAD
+    <!--<%=basePath%>-->
+     <%--https://localhost:8081/chance/--%>
+=======
     <div class="outer-wrap">
         <div class="login-panel">
             <h2 align="center"><font size="5" color="#fff8dc">欢迎登录</font></h2>
@@ -53,6 +57,7 @@
 
 
 
+>>>>>>> 81593878418a8d5d0a445a0def8b6899163adef0
     <form name="loginForm" action="login/verify" method="post">
         <table align="center">
             <tr>

@@ -19,10 +19,22 @@ public class DynamicProviderController {
     DynamicProviderService dynamicProviderService;
 
     @RequestMapping(value = "/dyn/findbyid",produces = "application/json")
-    public Result getTestUsrById(Integer usrId){
+    public Result getTestUsrById(String usrId){
 
         User res =  dynamicProviderService.findUserById(usrId);
         return ResultUtils.success(200,res);
+    }
+
+    @RequestMapping(value = "/dyn/checkVerify", method = RequestMethod.GET)
+    public Result chechVerifyById(String usrId){
+        String res =  dynamicProviderService.findIsVerifiedByUsrId(usrId);
+        return ResultUtils.success(200,res);
+    }
+
+    @RequestMapping(value = "/dyn/getcardnum", method = RequestMethod.GET)
+    public Result getInvitationCardsNum(String usrId){
+        Integer res = dynamicProviderService.getInvitationCardsNumByUsrId(usrId);
+        return ResultUtils.success(200, res);
     }
 
 
@@ -34,12 +46,13 @@ public class DynamicProviderController {
 
 
     @RequestMapping(value = "/dyn/homepage", method = RequestMethod.GET)
-    public Result<List<User>> getTestUsrInHomepage(String usrSex, String isStudent, String usrEducation){
+    public Result<List<User>> getTestUsrInHomepage(String usrSex, Integer lowAge, Integer highAge,
+                                                   String isStudent, String usrEducation){
         User user1 = new User();
         user1.setUsrSex(usrSex);
         user1.setIsStudent(isStudent);
         user1.setUsrEducation(usrEducation);
-        List<User> results = dynamicProviderService.findUserInHomePage(user1);
+        List<User> results = dynamicProviderService.findUserInHomePage(user1, lowAge, highAge);
         return ResultUtils.success(200,results);
     }
 

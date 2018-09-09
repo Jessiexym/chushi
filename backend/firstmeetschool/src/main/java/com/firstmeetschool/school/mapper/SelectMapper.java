@@ -15,7 +15,7 @@ public interface SelectMapper {
     List<User> findAllUsersList();
 
     @Select("select * from user where usrId = #{usrId}")
-    User findUserById(@Param("usrId") Integer usrId);
+    User findUserById(@Param("usrId") String usrId);
 
     @Select("select * from user where openid = #{openid}")
     User findUserByopenid(@Param("openid") String openid);

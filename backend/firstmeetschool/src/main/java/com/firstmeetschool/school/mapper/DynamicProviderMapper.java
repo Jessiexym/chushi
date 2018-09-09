@@ -13,7 +13,13 @@ import java.util.Map;
 public interface DynamicProviderMapper {
 
     @SelectProvider(type = UserDynamicSqlProvider.class, method = "findUserByIdSql")
-    User findUserById(Integer id);
+    User findUserById(String id);
+
+    @SelectProvider(type = UserDynamicSqlProvider.class, method = "findVerifyStateByIdSql")
+    String findIsVerifiedByUsrId(String id);
+
+    @SelectProvider(type = UserDynamicSqlProvider.class, method = "findCardNumByIdSql")
+    Integer getInvitationCardsNumByUsrId(String id);
 
     @SelectProvider(type = UserDynamicSqlProvider.class, method = "findUserByNameSql")
     List<User> findUserByNameSql(String usrName);
@@ -33,7 +39,7 @@ public interface DynamicProviderMapper {
 
     class UserDynamicSqlProvider {
 
-        public String findUserByIdSql(final Integer userId){
+        public String findUserByIdSql(final String userId){
             return new SQL(){
                 {
                     SELECT("*");
@@ -42,6 +48,27 @@ public interface DynamicProviderMapper {
                 }
             }.toString();
         }
+
+        public String findVerifyStateByIdSql(final String usrId){
+            return new SQL(){
+                {
+                    SELECT("isVerified");
+                    FROM("user");
+                    WHERE("usrId="+usrId);
+                }
+            }.toString();
+        }
+
+        public String findCardNumByIdSql(final String usrId){
+            return new SQL(){
+                {
+                    SELECT("invitationCards");
+                    FROM("user");
+                    WHERE("usrId="+usrId);
+                }
+            }.toString();
+        }
+
 
         public String findUserByNameSql(final String usrName){
             return new SQL(){
@@ -60,9 +87,12 @@ public interface DynamicProviderMapper {
                 {
                     SELECT("*");
                     FROM("user");
-                    WHERE("usrAge >= 20 AND usrAge <=27");
+//                    WHERE("usrAge >= 20 AND usrAge <=27");
                     if(StringUtils.isNotBlank((String)map.get("usrSex"))){
                         WHERE("usrSex=#{usrSex}");
+                    }
+                    if((map.get("lowAge") != null) && (map.get("highAge") !=null)){
+                        WHERE("usrAge >= #{lowAge} AND usrAge <= #{highAge}");
                     }
                     if(StringUtils.isNotBlank((String)map.get("isStudent"))){
                         WHERE("isStudent=#{isStudent}");
@@ -142,6 +172,18 @@ public interface DynamicProviderMapper {
                     if (user.getCalloutNum() != null) {
                         SET("calloutNum = #{calloutNum}");
                     }
+                    if(user.getThumbsUp() != null){
+                        SET("likeNum = #{likeNum}");
+                    }
+                    if(user.getIsVerified() != null){
+                        SET("isVerified = #{isVerified}");
+                    }
+                    if(user.getChushiTa() != null){
+                        SET("chushiTa = #{chushiTa}");
+                    }
+                    if(user.getIdentifyPhoto() != null){
+                        SET("identifyPhoto = #{identifyPhoto}");
+                    }
                     WHERE("usrId = #{usrId}");
                 }
             }.toString();
@@ -152,6 +194,9 @@ public interface DynamicProviderMapper {
             return new SQL() {
                 {
                     INSERT_INTO("user");
+                    if (user.getUsrId() != null) {
+                        VALUES("usrId", "#{usrId}");
+                    }
                     if (user.getUsrName() != null) {
                         VALUES("usrName", "#{usrName}");
                     }
@@ -192,7 +237,7 @@ public interface DynamicProviderMapper {
                         VALUES("usrHobby", "#{usrHobby}");
                     }if(user.getBirthDay() != null){
                     VALUES("birthDay", "#{birthDay}");
-                }
+                    }
                     if(user.getUsrMotto() != null){
                         VALUES("usrMotto", "#{usrMotto}");
                     }
@@ -213,6 +258,18 @@ public interface DynamicProviderMapper {
                     }
                     if(user.getCalloutNum() != null){
                         VALUES("calloutNum", "#{calloutNum}");
+                    }
+                    if(user.getThumbsUp() != null){
+                        VALUES("likeNum", "#{likeNum}");
+                    }
+                    if(user.getIsVerified() != null){
+                        VALUES("isVerified", "#{isVerified}");
+                    }
+                    if(user.getChushiTa() != null){
+                        VALUES("chushiTa", "#{chushiTa}");
+                    }
+                    if(user.getIdentifyPhoto() != null){
+                        VALUES("identifyPhoto", "#{identifyPhoto}");
                     }
 
                 }

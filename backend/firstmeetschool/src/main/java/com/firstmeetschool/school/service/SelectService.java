@@ -13,7 +13,7 @@ public class SelectService {
     @Autowired(required = false)
     private SelectMapper selectMapper;
 
-    public User getUserById(Integer usrId){
+    public User getUserById(String usrId){
         User user = this.selectMapper.findUserById(usrId);
         return user;
     }

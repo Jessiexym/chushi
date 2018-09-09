@@ -31,7 +31,7 @@ public class SelectController {
 ////    }
 
     @RequestMapping(value = "/{usrId}", method = RequestMethod.GET)
-    public User getNewUserById(@PathVariable("usrId") Integer usrId){
+    public User getNewUserById(@PathVariable("usrId") String usrId){
         User res =  userService.getUserById(usrId);
         return res;
     }

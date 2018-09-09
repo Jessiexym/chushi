@@ -87,8 +87,13 @@
         </ul>
     </li>
 
+<<<<<<< HEAD
+<!--<%=basePath%>-->
+<%--https://localhost:8081/chance/--%>
+=======
 </ul>
 </div>
+>>>>>>> 81593878418a8d5d0a445a0def8b6899163adef0
 
 </body>
 
