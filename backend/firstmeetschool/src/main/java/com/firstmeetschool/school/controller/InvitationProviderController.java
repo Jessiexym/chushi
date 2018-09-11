@@ -20,6 +20,13 @@ public class InvitationProviderController {
     public int getSenderInvitationCards(String senderId){
         return invitationProviderService.getInvitationCardNum(senderId);
     }
+
+    @RequestMapping(value = "/invitation/record", method = RequestMethod.GET)
+    public Invitation getRecordByTwoIds(String senderId, String receiverId){
+        Invitation invitation = invitationProviderService.getRecordBysenderIdAndReceiverId(senderId, receiverId);
+        return invitation;
+    }
+
     @RequestMapping(value = "/invitation/state", method = RequestMethod.GET)
     public int getSenderReceiverState(String senderId, String receiverId){
         Invitation res = invitationProviderService.getSenderAndReceiverState(senderId, receiverId);

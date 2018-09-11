@@ -13,6 +13,9 @@ public interface InvitationProviderMapper {
     @SelectProvider(type = invitationSqlProvider.class, method = "getInvitaionCardsNum") //查看邀约者邀约卡数
     int getInvitationCardNum(String senderId);
 
+    @SelectProvider(type = invitationSqlProvider.class, method = "findRecordById")
+    Invitation getRecordBysenderIdAndReceiverId(Map<String, Object> map);
+
     @SelectProvider(type = invitationSqlProvider.class, method = "getTwoPairState")  //查看邀约者与被邀约者状态
     Invitation getSenderAndReceiverState(Map<String, Object> map);
 
@@ -40,6 +43,22 @@ public interface InvitationProviderMapper {
                    WHERE("usrId="+senderId);
                 }
             }.toString();
+        }
+
+        public String findRecordById(Map<String, Object> map){
+            return new SQL(){
+                {
+                    SELECT("*");
+                    FROM("invitation");
+                    if(StringUtils.isNotBlank((String)map.get("senderId"))){
+                        WHERE("senderId=#{senderId}");
+                    }
+                    if(StringUtils.isNotBlank((String)map.get("receiverId"))){
+                        WHERE("receiverId=#{receiverId}");
+                    }
+                }
+            }.toString();
+
         }
 
         public String getTwoPairState(final Map<String, Object> pairMap){
@@ -127,11 +146,21 @@ public interface InvitationProviderMapper {
             return new SQL(){
                 {
                    UPDATE("invitation");
-                   if(invitation.getReceiverState()!= null){
-                       SET("senderState=#{senderState}");
-                       SET("receiverState=#{senderState}");
-//                   }else if(invitation.getReceiverState()==3){
-//                       SET("senderState=3");
+                   if(invitation.getSenderState()!= null){
+                       SET("senderState = #{senderState}");
+                       SET("receiverState = #{senderState}");
+                   }else if(invitation.getReceiverState() != null){
+                       SET("senderState = #{receiverState}");
+                       SET("receiverState = #{receiverState}");
+                   }
+//                   if(invitation.getReceiverState() != null){
+//                       SET("receiverState = #{receiverState}");
+//                   }
+                   if(invitation.getInvitationWords() != null){
+                       SET("invitationWords = #{invitationWords}");
+                   }
+                   if ((invitation.getSenderId()!=null) && (invitation.getReceiverId()!=null)) {
+                       WHERE("senderId=#{senderId} AND receiverId=#{receiverId}");
                    }
                 }
             }.toString();

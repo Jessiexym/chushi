@@ -21,6 +21,14 @@ public class InvitationProviderServiceImpl implements InvitationProviderService 
     }
 
     @Override
+    public Invitation getRecordBysenderIdAndReceiverId(String senderId, String receiverId){
+        Map<String, Object> pairMap = new HashMap<>();
+        pairMap.put("senderId", senderId);
+        pairMap.put("receiverId", receiverId);
+        return invitationProviderMapper.getRecordBysenderIdAndReceiverId(pairMap);
+    }
+
+    @Override
     public Invitation getSenderAndReceiverState(String senderId, String receiverId){
         Map<String, Object> pairMap = new HashMap<>();
         pairMap.put("senderId", senderId);
@@ -61,7 +69,11 @@ public class InvitationProviderServiceImpl implements InvitationProviderService 
 
     @Override
     public int updateInvitationRecord(Invitation invitation){
-        return invitationProviderMapper.updateInvitationRecord(invitation);
+        Invitation temp = getRecordBysenderIdAndReceiverId(invitation.getSenderId(), invitation.getReceiverId());
+        temp.setSenderState(invitation.getSenderState());
+        temp.setReceiverState(invitation.getReceiverState());
+        temp.setInvitationWords(invitation.getInvitationWords());
+        return invitationProviderMapper.updateInvitationRecord(temp);
     }
 
 }
