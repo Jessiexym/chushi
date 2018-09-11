@@ -88,9 +88,8 @@ public class User {
 
     public void  setId(Integer id){this.id = id;}
 
-<<<<<<< HEAD
     public Integer getId(){return id;}
-=======
+
     private String openid;
 
     public String getOpenid() {
@@ -100,7 +99,6 @@ public class User {
     public void setOpenid(String openid) {
         this.openid = openid;
     }
->>>>>>> 81593878418a8d5d0a445a0def8b6899163adef0
 
     public void setUsrId(String usrId){ this.usrId = usrId;}
 

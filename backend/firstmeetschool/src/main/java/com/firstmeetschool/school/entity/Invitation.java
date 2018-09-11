@@ -8,7 +8,8 @@ public class Invitation {
     private String senderId;
     private String receiverId;
     private Integer senderState;
-    private Integer receiverState;
+    private Integer receiverState;   //1是等待；2是拒绝；3是同意
+    private String invitationWords;
 
     public Integer getId() { return id; }
 
@@ -28,5 +29,9 @@ public class Invitation {
 
     public Integer getReceiverState() {return receiverState;}
 
-    public void setReceiverState(Integer receiverState) {this.senderState=receiverState;}
+    public void setReceiverState(Integer receiverState) {this.receiverState=receiverState;}
+
+    public void setInvitationWords(String invitationWords) {this.invitationWords=invitationWords;}
+
+    public String getInvitationWords(){return invitationWords;}
 }

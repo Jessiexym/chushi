@@ -124,7 +124,7 @@ public class LoginService {
 
         System.out.println("是否认证:"+subject.isAuthenticated());
 
-        Integer id = selectService.getUserByopenid(openid).getUsrId();
+        String id = selectService.getUserByopenid(openid).getUsrId();
         hashMap.put("object","register");
         hashMap.put("openid",openid);
         hashMap.put("usrId",id);

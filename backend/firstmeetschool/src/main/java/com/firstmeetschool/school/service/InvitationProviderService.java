@@ -5,8 +5,12 @@ import com.firstmeetschool.school.entity.Invitation;
 import java.util.List;
 
 public interface InvitationProviderService {
+    int getInvitationCardNum(String senderId);
+    Invitation getSenderAndReceiverState(String senderId, String receiverId);
+    String getReceiverWechatByState(String senderId, String receiverId);
+    List<String> getAllSendersbySenderId(String senderId);
     List<String> getAllReceiversbySenderId(String senderId);
-    String getReceiverWechatByState(Invitation invitation);
+//    String getReceiverWechatByState(Invitation invitation);
     int createInvitationRecord(Invitation invitation);
     int updateInvitationRecord(Invitation invitation);
 }

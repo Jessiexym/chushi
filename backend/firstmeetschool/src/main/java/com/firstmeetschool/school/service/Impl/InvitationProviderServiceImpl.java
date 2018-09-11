@@ -6,7 +6,9 @@ import com.firstmeetschool.school.service.InvitationProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class InvitationProviderServiceImpl implements InvitationProviderService {
@@ -14,13 +16,36 @@ public class InvitationProviderServiceImpl implements InvitationProviderService 
     InvitationProviderMapper invitationProviderMapper;
 
     @Override
-    public List<String> getAllReceiversbySenderId(String senderId){
-        return invitationProviderMapper.getAllReceiversbySenderId(senderId);
+    public int getInvitationCardNum(String senderId){
+        return invitationProviderMapper.getInvitationCardNum(senderId);
     }
 
     @Override
-    public String getReceiverWechatByState(Invitation invitation){
-        return invitationProviderMapper.getReceiverWechatByState(invitation);
+    public Invitation getSenderAndReceiverState(String senderId, String receiverId){
+        Map<String, Object> pairMap = new HashMap<>();
+        pairMap.put("senderId", senderId);
+        pairMap.put("receiverId", receiverId);
+        return invitationProviderMapper.getSenderAndReceiverState(pairMap);
+    }
+
+    @Override
+    public String getReceiverWechatByState(String senderId, String receiverId){
+        Map<String, Object> pairMap = new HashMap<>();
+//        pairMap.put("senderState", senderState);
+//        pairMap.put("receiverState", receiverState);
+        pairMap.put("senderId", senderId);
+        pairMap.put("receiverId", receiverId);
+        return invitationProviderMapper.getReceiverWechatByState(pairMap);
+    }
+
+    @Override
+    public List<String> getAllSendersbySenderId(String senderId){
+        return invitationProviderMapper.getAllSendersbySenderId(senderId);
+    }
+
+    @Override
+    public List<String> getAllReceiversbySenderId(String senderId){
+        return invitationProviderMapper.getAllReceiversbySenderId(senderId);
     }
 
     @Override
