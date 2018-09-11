@@ -50,7 +50,13 @@ public class InvitationProviderServiceImpl implements InvitationProviderService 
 
     @Override
     public int createInvitationRecord(Invitation invitation){
-        return invitationProviderMapper.createInvitationRecord(invitation);
+        Invitation temp = new Invitation();
+        temp.setSenderId(invitation.getSenderId());
+        temp.setReceiverId(invitation.getReceiverId());
+        temp.setSenderState(invitation.getSenderState());
+//        temp.setReceiverState(invitation.getReceiverState());
+        temp.setInvitationWords(invitation.getInvitationWords());
+        return invitationProviderMapper.createInvitationRecord(temp);
     }
 
     @Override

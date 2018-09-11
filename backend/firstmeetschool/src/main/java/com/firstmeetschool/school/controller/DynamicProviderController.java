@@ -58,7 +58,6 @@ public class DynamicProviderController {
 
 
     //TODO: get usrId first
-
     @RequestMapping(value = "/dyn/update", method = RequestMethod.POST)
     public Result updateUserInfo(User user){
         System.out.println(user);

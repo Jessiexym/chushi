@@ -116,6 +116,9 @@ public interface InvitationProviderMapper {
                         VALUES("receiverId", "#{receiverId}");
                         VALUES("receiverState", "1");
                     }
+                    if(invitation.getInvitationWords() != null){
+                        VALUES("invitationWords", "#{invitationWords}");
+                    }
                 }
             }.toString();
         }
@@ -124,10 +127,11 @@ public interface InvitationProviderMapper {
             return new SQL(){
                 {
                    UPDATE("invitation");
-                   if(invitation.getReceiverState()==2){
-                       SET("senderState=2");
-                   }else if(invitation.getReceiverState()==3){
-                       SET("senderState=3");
+                   if(invitation.getReceiverState()!= null){
+                       SET("senderState=#{senderState}");
+                       SET("receiverState=#{senderState}");
+//                   }else if(invitation.getReceiverState()==3){
+//                       SET("senderState=3");
                    }
                 }
             }.toString();

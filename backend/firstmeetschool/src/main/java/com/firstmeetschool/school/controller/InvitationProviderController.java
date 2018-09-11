@@ -50,5 +50,14 @@ public class InvitationProviderController {
         return invitationProviderService.getAllReceiversbySenderId(senderId);
     }
 
+    @RequestMapping(value = "/invitation/insert", method = RequestMethod.POST)
+    public int InsertInvitationRecord(Invitation invitation){
+        return invitationProviderService.createInvitationRecord(invitation);
+    }
+
+    @RequestMapping(value = "/invitation/update", method = RequestMethod.POST)
+    public int UpdateInvitationRecord(Invitation invitation){
+        return invitationProviderService.updateInvitationRecord(invitation);
+    }
 
 }

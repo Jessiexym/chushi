@@ -10,7 +10,6 @@ public interface InvitationProviderService {
     String getReceiverWechatByState(String senderId, String receiverId);
     List<String> getAllSendersbySenderId(String senderId);
     List<String> getAllReceiversbySenderId(String senderId);
-//    String getReceiverWechatByState(Invitation invitation);
     int createInvitationRecord(Invitation invitation);
     int updateInvitationRecord(Invitation invitation);
 }
